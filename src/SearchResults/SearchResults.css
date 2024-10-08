@@ -1,0 +1,22 @@
+.SearchResults {
+  margin: 20px 0; /* Spacing around the component */
+}
+
+h2 {
+  font-size: 2rem; /* Subheading style */
+  margin-bottom: 15px; /* Spacing below the heading */
+}
+
+.track {
+  background-color: #f9f9f9; /* Track background */
+  color: #000; /* Text color */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transition: transform 0.2s; /* Smooth transform effect */
+}
+
+.track:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}

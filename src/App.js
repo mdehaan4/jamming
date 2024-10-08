@@ -1,18 +1,90 @@
-import './App.css';
+import React, { useState } from 'react'; // Import useState
+import './App.css'; // Importing styles for the App component
+import SearchBar from './SearchBar/SearchBar'; // Importing SearchBar component
+import SearchResults from './SearchResults/SearchResults'; // Importing SearchResults component
+import Playlist from './Playlist/Playlist'; // Importing Playlist component
+import logo from './logo.svg'; // Import the logo
+
+// Define an array of track objects with unique IDs and mock URIs
+const initialTracks = [
+  {
+    id: "1", // Unique ID
+    name: "In Da Club",
+    artist: "50 Cent",
+    album: "Get Rich, Die Tryin'",
+    uri: "spotify:track:1" // Mock URI
+  },
+  {
+    id: "2", // Unique ID
+    name: "Yeah",
+    artist: "Usher",
+    album: "Greatest Hits",
+    uri: "spotify:track:2" // Mock URI
+  },
+  {
+    id: "3", // Unique ID
+    name: "Perfect",
+    artist: "Ed Sheeran",
+    album: "The X Album",
+    uri: "spotify:track:3" // Mock URI
+  }
+];
 
 function App() {
+  const [tracks, setTracks] = useState(initialTracks); // Set initial state for tracks
+  const [filteredTracks, setFilteredTracks] = useState(initialTracks); // State for filtered tracks
+  const [playlistName, setPlaylistName] = useState("My Playlist"); // State for playlist name
+  const [playlistTracks, setPlaylistTracks] = useState([]); // State for playlist tracks
+
+  // Search function to filter tracks
+  const handleSearch = (searchTerm) => {
+    const filtered = tracks.filter(track => 
+      track.name.toLowerCase().includes(searchTerm.toLowerCase()) || // Filter by track name
+      track.artist.toLowerCase().includes(searchTerm.toLowerCase()) // Filter by artist name
+    );
+    setFilteredTracks(filtered); // Update the filtered tracks state
+  };
+
+  // Function to add a track to the playlist
+  const addTrackToPlaylist = (track) => {
+    if (!playlistTracks.find(t => t.id === track.id)) { // Avoid duplicates
+      setPlaylistTracks([...playlistTracks, track]);
+    }
+  };
+
+  // Function to remove a track from the playlist
+  const removeTrackFromPlaylist = (track) => {
+    const updatedPlaylist = playlistTracks.filter(t => t.id !== track.id); // Filter out the track to remove
+    setPlaylistTracks(updatedPlaylist); // Update the playlist tracks
+  };
+
+  // Function to save the playlist
+  const savePlaylist = () => {
+    const trackURIs = playlistTracks.map(track => track.uri); // Get URIs of the playlist tracks
+    console.log('Saving playlist with URIs:', trackURIs); // Mock save action
+    setPlaylistTracks([]); // Reset the playlist
+    setPlaylistName(''); // Reset the playlist name
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Jammming!</h1>
-        <p>
-          Start building your playlist by searching for your favorite songs.
-        </p>
-      </header>
+      <img src={logo} className="App-logo" alt="logo" /> {/* Add logo here */}
+      <h1>Jammming</h1> {/* Main title for the application */}
+      <SearchBar onSearch={handleSearch} /> {/* Pass the handleSearch function to SearchBar */}
+      <SearchResults 
+        tracks={filteredTracks} 
+        onAdd={addTrackToPlaylist} 
+      /> {/* Pass the filtered tracks and add function to SearchResults */}
+      <Playlist 
+        playlistName={playlistName} 
+        playlistTracks={playlistTracks} // Ensure this matches what Playlist expects
+        setPlaylistTracks={setPlaylistTracks} 
+        setPlaylistName={setPlaylistName} 
+        onRemove={removeTrackFromPlaylist} // Pass the remove function to Playlist
+        onSave={savePlaylist} // Pass the save function to Playlist
+      /> {/* Pass playlist data to Playlist */}
     </div>
   );
 }
 
-export default App;
-
-
+export default App; // Exporting the App component

@@ -1,0 +1,49 @@
+.Playlist {
+  margin: 20px 0; /* Spacing around the component */
+  padding: 10px; /* Padding inside the playlist */
+  background-color: #486f94; /* Background color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+h2 {
+  font-size: 2rem; /* Subheading style */
+  margin-bottom: 15px; /* Spacing below the heading */
+}
+
+.track {
+  background-color: #a3b0da; /* Track background */
+  color: #000; /* Text color */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.2s; /* Smooth background color transition */
+}
+
+.track:hover {
+  background-color: #e2e2e2; /* Darken background on hover */
+}
+
+button {
+  background-color: #e74c3c; /* Remove button color */
+  color: #fff; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px 12px; /* Padding for button */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s; /* Smooth background transition */
+}
+
+button:hover {
+  background-color: #c0392b; /* Darken button on hover */
+}
+
+input[type="text"] {
+  padding: 8px;
+  margin: 10px 0; /* Space above and below */
+  border: 1px solid #61dafb; /* Input border color */
+  border-radius: 5px; /* Rounded corners */
+  outline: none; /* Remove outline on focus */
+  width: 250px; /* Set a width for the input */
+}
+

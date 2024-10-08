@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  font-family: 'Arial', sans-serif; /* Added font family for better typography */
+  background-color: #5c85b0; /* Change this value to your desired shade of blue */
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  color: white; /* Optional: change text color to improve contrast */
 }
 
 .App-logo {
@@ -13,26 +17,78 @@
   }
 }
 
+
 .App-header {
-  background-color: #282c34;
+  background-color: #4e75c5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(32, 119, 186);
+  padding: 20px; /* Added padding */
+  border-bottom: 5px solid #61dafb; /* Added a border for separation */
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 3rem; /* Larger title font */
+  margin-bottom: 20px; /* Spacing below the title */
+  text-shadow: 2px 2px 4px rgba(33, 98, 163, 0.5); /* Added text shadow for depth */
+  letter-spacing: 1px; /* Increased spacing between letters */
 }
+
+h2 {
+  font-size: 2rem; /* Subheading style */
+  margin: 20px 0; /* Spacing above and below */
+}
+
+.track {
+  background-color: #dde2e8; /* Track background */
+  color: #2bb21f; /* Text color */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transition: transform 0.2s; /* Smooth transform effect */
+}
+
+.track:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+button {
+  background-color: #61dafb; /* Button color */
+  color: #fff; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for button */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s; /* Smooth background transition */
+}
+
+button:hover {
+  background-color: #4da6d1; /* Darken button on hover */
+}
+
+input[type="text"] {
+  padding: 10px; /* Padding inside the input */
+  margin: 10px 0; /* Margin above and below */
+  border: 1px solid #61dafb; /* Input border color */
+  border-radius: 5px; /* Rounded corners */
+  outline: none; /* Remove outline on focus */
+  width: 200px; /* Set a width for the input */
+}
+
+input[type="text"]:focus {
+  border-color: #4da6d1; /* Darken border on focus */
+}
+
+
