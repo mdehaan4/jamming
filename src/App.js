@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import './App.css'; // Importing styles for the App component
 import SearchBar from './SearchBar/SearchBar'; // Importing SearchBar component
 import SearchResults from './SearchResults/SearchResults'; // Importing SearchResults component
@@ -36,6 +36,42 @@ function App() {
   const [playlistName, setPlaylistName] = useState("My Playlist"); // State for playlist name
   const [playlistTracks, setPlaylistTracks] = useState([]); // State for playlist tracks
 
+  // State for OAuth tokens
+  const [codeVerifier, setCodeVerifier] = useState('');
+  const [codeChallenge, setCodeChallenge] = useState('');
+
+  // Generate code verifier and code challenge
+  useEffect(() => {
+    const generateCodeVerifier = () => {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+      let verifier = '';
+      for (let i = 0; i < 128; i++) {
+        verifier += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return verifier;
+    };
+
+    const base64UrlEncode = (buffer) => {
+      return btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)))
+        .replace(/\+/g, '-') // Replace '+' with '-'
+        .replace(/\//g, '_') // Replace '/' with '_'
+        .replace(/=+$/, ''); // Remove trailing '='
+    };
+
+    const generateCodeChallenge = async (verifier) => {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(verifier);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Hash the code verifier
+      return base64UrlEncode(hashBuffer); // Base64 URL encode the hash
+    };
+
+    const verifier = generateCodeVerifier();
+    generateCodeChallenge(verifier).then(challenge => {
+      setCodeVerifier(verifier);
+      setCodeChallenge(challenge);
+    });
+  }, []);
+
   // Search function to filter tracks
   const handleSearch = (searchTerm) => {
     const filtered = tracks.filter(track => 
@@ -66,6 +102,10 @@ function App() {
     setPlaylistName(''); // Reset the playlist name
   };
 
+  // Log the code verifier and challenge to see them
+  console.log('Code Verifier:', codeVerifier);
+  console.log('Code Challenge:', codeChallenge);
+
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" /> {/* Add logo here */}
@@ -88,3 +128,4 @@ function App() {
 }
 
 export default App; // Exporting the App component
+
