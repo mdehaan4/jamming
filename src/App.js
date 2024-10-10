@@ -1,84 +1,99 @@
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import React, { useState, useEffect } from 'react';
 import './App.css'; // Importing styles for the App component
 import SearchBar from './SearchBar/SearchBar'; // Importing SearchBar component
 import SearchResults from './SearchResults/SearchResults'; // Importing SearchResults component
 import Playlist from './Playlist/Playlist'; // Importing Playlist component
 import logo from './logo.svg'; // Import the logo
-
-// Define an array of track objects with unique IDs and mock URIs
-const initialTracks = [
-  {
-    id: "1", // Unique ID
-    name: "In Da Club",
-    artist: "50 Cent",
-    album: "Get Rich, Die Tryin'",
-    uri: "spotify:track:1" // Mock URI
-  },
-  {
-    id: "2", // Unique ID
-    name: "Yeah",
-    artist: "Usher",
-    album: "Greatest Hits",
-    uri: "spotify:track:2" // Mock URI
-  },
-  {
-    id: "3", // Unique ID
-    name: "Perfect",
-    artist: "Ed Sheeran",
-    album: "The X Album",
-    uri: "spotify:track:3" // Mock URI
-  }
-];
+import Spotify from './Spotify'; // Importing Spotify.js
 
 function App() {
-  const [tracks, setTracks] = useState(initialTracks); // Set initial state for tracks
-  const [filteredTracks, setFilteredTracks] = useState(initialTracks); // State for filtered tracks
+  const [tracks, setTracks] = useState([]); // Set initial state for tracks (empty, as we're fetching data)
+  const [filteredTracks, setFilteredTracks] = useState([]); // State for filtered tracks
   const [playlistName, setPlaylistName] = useState("My Playlist"); // State for playlist name
   const [playlistTracks, setPlaylistTracks] = useState([]); // State for playlist tracks
+  const [loading, setLoading] = useState(false); // State for loading indicator
+  const [accessToken, setAccessToken] = useState(''); // State for access token
 
-  // State for OAuth tokens
-  const [codeVerifier, setCodeVerifier] = useState('');
-  const [codeChallenge, setCodeChallenge] = useState('');
+  // Hardcoded tracks for testing
+  const hardcodedTracks = [
+    { id: '1', name: 'In Da Club', artist: '50 Cent', album: 'Get Rich or Die Tryin\'', uri: 'spotify:track:1' },
+    { id: '2', name: 'Yeah', artist: 'Usher', album: 'Confessions', uri: 'spotify:track:2' },
+    { id: '3', name: 'Perfect', artist: 'Ed Sheeran', album: 'The X', uri: 'spotify:track:3' }
+  ];
 
-  // Generate code verifier and code challenge
+  // UseEffect to get Spotify Access Token
   useEffect(() => {
-    const generateCodeVerifier = () => {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
-      let verifier = '';
-      for (let i = 0; i < 128; i++) {
-        verifier += characters.charAt(Math.floor(Math.random() * characters.length));
+    const token = Spotify.getAccessToken(); // Get the access token
+    setAccessToken(token); // Store the access token
+    console.log('Access Token:', token); // Log the access token
+    setFilteredTracks(hardcodedTracks); // Set the hardcoded tracks as the initial state for filtered tracks
+  }, []); // This will only run once when the component mounts
+
+  // Fetch User's Spotify ID
+  const fetchUserId = async () => {
+    try {
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Use the stored access token
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user ID');
       }
-      return verifier;
-    };
 
-    const base64UrlEncode = (buffer) => {
-      return btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)))
-        .replace(/\+/g, '-') // Replace '+' with '-'
-        .replace(/\//g, '_') // Replace '/' with '_'
-        .replace(/=+$/, ''); // Remove trailing '='
-    };
+      const data = await response.json();
+      return data.id; // Return the user ID
+    } catch (error) {
+      console.error('Error fetching user ID:', error);
+    }
+  };
 
-    const generateCodeChallenge = async (verifier) => {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(verifier);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Hash the code verifier
-      return base64UrlEncode(hashBuffer); // Base64 URL encode the hash
-    };
-
-    const verifier = generateCodeVerifier();
-    generateCodeChallenge(verifier).then(challenge => {
-      setCodeVerifier(verifier);
-      setCodeChallenge(challenge);
-    });
-  }, []);
-
-  // Search function to filter tracks
+  // Search function to fetch tracks from Spotify API
   const handleSearch = (searchTerm) => {
-    const filtered = tracks.filter(track => 
-      track.name.toLowerCase().includes(searchTerm.toLowerCase()) || // Filter by track name
-      track.artist.toLowerCase().includes(searchTerm.toLowerCase()) // Filter by artist name
-    );
-    setFilteredTracks(filtered); // Update the filtered tracks state
+    if (!searchTerm) {
+      setFilteredTracks(hardcodedTracks); // Reset to hardcoded tracks if no search term
+      return;
+    }
+
+    setLoading(true); // Optional: Set loading state
+
+    Spotify.search(searchTerm)
+      .then((response) => {
+        console.log('Response from Spotify:', response); // Log the raw response for debugging
+
+        // Check if the response has the expected structure
+        if (response && Array.isArray(response)) {
+          const tracks = response; // Set the received tracks directly
+          if (tracks.length === 0) {
+            console.warn('No tracks found for the search term:', searchTerm);
+            setFilteredTracks(hardcodedTracks); // Reset to hardcoded tracks if no results
+            return;
+          }
+
+          // Format the tracks received from the API
+          const formattedTracks = tracks.map(track => ({
+            id: track.id,
+            name: track.name,
+            artist: track.artists && track.artists.length > 0 ? track.artists[0].name : 'Unknown Artist', // Ensure to access the first artist
+            album: track.album ? track.album.name : 'Unknown Album', // Check for album existence
+            uri: track.uri
+          }));
+
+          setFilteredTracks(formattedTracks); // Update the filtered tracks state
+        } else {
+          console.error('Unexpected response structure:', response); // Log unexpected structure
+          setFilteredTracks(hardcodedTracks); // Reset to hardcoded tracks on error
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching tracks from Spotify:', error);
+        setFilteredTracks(hardcodedTracks); // Reset to hardcoded tracks on error
+      })
+      .finally(() => {
+        setLoading(false); // Set loading state to false after fetching
+      });
   };
 
   // Function to add a track to the playlist
@@ -95,26 +110,82 @@ function App() {
   };
 
   // Function to save the playlist
-  const savePlaylist = () => {
+  const savePlaylist = async () => {
     const trackURIs = playlistTracks.map(track => track.uri); // Get URIs of the playlist tracks
-    console.log('Saving playlist with URIs:', trackURIs); // Mock save action
-    setPlaylistTracks([]); // Reset the playlist
-    setPlaylistName(''); // Reset the playlist name
-  };
+    console.log('Saving playlist with URIs:', trackURIs); // Log the URIs being saved
+    console.log('Playlist Name:', playlistName); // Log playlist name
 
-  // Log the code verifier and challenge to see them
-  console.log('Code Verifier:', codeVerifier);
-  console.log('Code Challenge:', codeChallenge);
+    try {
+      const userId = await fetchUserId(); // Fetch user ID
+      console.log('User ID:', userId); // Log user ID
+      if (!userId) {
+        console.error('User ID is not available');
+        return;
+      }
+
+      // Create a new playlist using the user ID
+      const createPlaylistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Use the stored access token
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: playlistName || 'New Playlist', // Fallback to default name if empty
+          description: 'My custom playlist created from Jammming',
+          public: false, // Set to false if you want the playlist to be private
+        }),
+      });
+
+      if (!createPlaylistResponse.ok) {
+        const errorResponse = await createPlaylistResponse.json(); // Log error details
+        console.error('Error creating playlist:', errorResponse);
+        throw new Error('Failed to create playlist');
+      }
+
+      const playlistData = await createPlaylistResponse.json(); // Get the new playlist data
+      const playlistId = playlistData.id; // Get the new playlist ID
+
+      // Add tracks to the playlist
+      const addTracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Use the stored access token
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uris: trackURIs, // Track URIs to add
+        }),
+      });
+
+      if (!addTracksResponse.ok) {
+        const errorResponse = await addTracksResponse.json(); // Log error details
+        console.error('Error adding tracks to playlist:', errorResponse);
+        throw new Error('Failed to add tracks to playlist');
+      }
+
+      console.log('Playlist saved to Spotify successfully!'); // Log success
+      // Reset the playlist here
+      setPlaylistTracks([]); // Clear the current playlist
+      setPlaylistName(''); // Reset playlist name
+    } catch (error) {
+      console.error('Error saving playlist:', error.message || error); // Log any errors
+    }
+  };
 
   return (
     <div className="App">
       <img src={logo} className="App-logo" alt="logo" /> {/* Add logo here */}
       <h1>Jammming</h1> {/* Main title for the application */}
       <SearchBar onSearch={handleSearch} /> {/* Pass the handleSearch function to SearchBar */}
-      <SearchResults 
-        tracks={filteredTracks} 
-        onAdd={addTrackToPlaylist} 
-      /> {/* Pass the filtered tracks and add function to SearchResults */}
+      {loading ? ( // Display loading indicator while fetching
+        <p>Loading...</p>
+      ) : (
+        <SearchResults 
+          tracks={filteredTracks} 
+          onAdd={addTrackToPlaylist} 
+        /> // Pass the filtered tracks and add function to SearchResults
+      )}
       <Playlist 
         playlistName={playlistName} 
         playlistTracks={playlistTracks} // Ensure this matches what Playlist expects
