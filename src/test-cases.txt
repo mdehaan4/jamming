@@ -1,0 +1,22 @@
+1. SearchBar
+Test Case ID	Description	                                    Expected Result	                Actual Result	                              Pass/Fail
+SB-01	Test input handling for valid search terms  	Search term is updated correctly	     Search term updated to "Valid Term"	            Pass
+SB-02	Test input handling for empty search terms	    No search is triggered	                  No search executed when input is empty	        Pass
+SB-03	Test search function trigger on button click	onSearch function is called	              onSearch function was called with "Valid Term"	Pass
+2. SearchResults
+Test Case ID	Description	                                        Expected Result	                Actual Result	                                        Pass/Fail
+SR-01	Test rendering of tracks received from API   	Tracks are displayed correctly	          3 tracks displayed as expected	                        Pass
+SR-02	Test adding a track to the playlist	            Track is added to playlist	              Track "In Da Club" added to playlist                  	Pass
+SR-03	Test adding duplicate tracks to the playlist	Duplicate tracks are not added	          Duplicate track was not added, playlist remains unchanged	Pass
+3. Playlist
+Test Case ID	Description                               	Expected Result         	                Actual Result	                                    Pass/Fail
+PL-01	Test rendering of playlist name and tracks         	Playlist name and tracks are shown	  Playlist name "My Playlist" and 3 tracks displayed	        Pass
+PL-02	Test removing a track from the playlist         	Track is removed from the playlist	  Track "Yeah" successfully removed from playlist	            Pass
+PL-03	Test saving the playlist to Spotify	                Playlist is saved successfully	      Playlist saved successfully to Spotify, confirmation received	Pass
+
+Test Case ID	Description         	                Expected Result	                             Actual Result	                                        Pass/Fail
+API-01	Test fetching user ID	                       User ID is fetched successfully	          User ID "user123" fetched successfully	                  Pass
+API-02	Test fetching tracks based on search term  	Correct tracks are returned	                  5 correct tracks returned for "Valid Term"	              Pass
+API-03	Test creating and saving a playlist       	Playlist is created and saved    	          Playlist "My Playlist" created and saved successfully	      Pass
+4. Spotify API Integration
+
