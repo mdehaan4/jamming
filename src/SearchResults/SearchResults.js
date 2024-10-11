@@ -2,12 +2,13 @@ import React from 'react';
 import Track from '../Track/Track';
 import './SearchResults.css';
 
-const SearchResults = ({ searchResults, onAdd }) => { // Change `tracks` to `searchResults`
-  if (!searchResults || searchResults.length === 0) { // Add check for undefined or empty searchResults
+const SearchResults = ({ searchResults, onAdd }) => {
+  // Check if searchResults is undefined or empty
+  if (!searchResults || searchResults.length === 0) {
     return (
       <div className="SearchResults">
         <h2>Results</h2>
-        <p>No results found. Please try a different search.</p>
+        <h3>No results found. Please try a different search.</h3>
       </div>
     );
   }
@@ -16,12 +17,17 @@ const SearchResults = ({ searchResults, onAdd }) => { // Change `tracks` to `sea
     <div className="SearchResults">
       <h2>Results</h2>
       <div>
-        {searchResults.map(track => ( // Use searchResults instead of tracks
-          <Track 
-            key={track.id}
-            track={track}
-            onAdd={onAdd}
-          />
+        {searchResults.map((track, index) => (
+          <React.Fragment key={track.id}>
+            <Track 
+              track={track}
+              onAdd={onAdd}
+            />
+            {/* Add a line (divider) between tracks */}
+            {index < searchResults.length - 1 && (
+              <hr className="track-divider" />
+            )}
+          </React.Fragment>
         ))}
       </div>
     </div>
@@ -29,6 +35,7 @@ const SearchResults = ({ searchResults, onAdd }) => { // Change `tracks` to `sea
 };
 
 export default SearchResults;
+
 
 
 

@@ -1,16 +1,24 @@
 .SearchResults {
-  margin: 20px 0; /* Spacing around the component */
-  background-color: #f0f0f0; /* Example background color */
-  color: rgb(46, 118, 226); /* Set the font color to blue */
-}
+  margin: 5px 0; /* Spacing around the component */
+  background-color: rgba(77, 138, 208, 1); /* Light grey background with 80% opacity */
+  color: rgb(16, 17, 18); /* Font color */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  opacity: 0.9; /* Overall opacity of 90% */
+  width: 100%; /* Set width to 90% of its parent container */
+  max-width: 1000px; /* Optional: set a maximum width */
+  }
+  
+
 
 h2 {
   font-size: 2rem; /* Subheading style */
   margin-bottom: 15px; /* Spacing below the heading */
+  color: black;
 }
 
 .track {
-  background-color: #184b92; /* Track background */
+  background-color: #f4f6f8; /* Track background */
   color: #000; /* Text color */
   padding: 10px;
   margin: 10px 0;
@@ -21,6 +29,14 @@ h2 {
 
 .track:hover {
   transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+h3 {
+  color: black;
+}
+
+.track p {
+  margin: 5px 0; /* Spacing between track information */
 }
 
 

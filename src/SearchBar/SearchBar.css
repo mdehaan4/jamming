@@ -6,12 +6,13 @@
 }
 
 input[type="text"] {
-  padding: 10px;
+  padding: 15px; /* Increased padding for a taller input */
   margin-right: 10px; /* Space between input and button */
   border: 1px solid #61dafb; /* Border color */
   border-radius: 5px; /* Rounded corners */
   outline: none; /* Remove outline on focus */
-  width: 250px; /* Set a width for the input */
+  width: 350px; /* Increased width for the input */
+  font-size: 1.2rem; /* Increased font size for better visibility */
 }
 
 input[type="text"]:focus {

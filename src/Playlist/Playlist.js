@@ -19,7 +19,6 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
 
   const handleBlur = () => {
     setIsEditing(false);
-    console.log('Updated Playlist Name:', newPlaylistName);
     onNameChange(newPlaylistName);
   };
 
@@ -45,6 +44,7 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
           <div key={track.id} className="track">
             <h3>{track.name}</h3>
             <p>{track.artist}</p>
+            <p>{track.album}</p> {/* Added album information */}
             <button onClick={() => onRemove(track)}>Remove</button>
           </div>
         ))
@@ -58,6 +58,4 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
 }
 
 export default Playlist;
-
-
 

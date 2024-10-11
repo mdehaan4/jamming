@@ -1,27 +1,43 @@
 .Playlist {
   margin: 20px 0; /* Spacing around the component */
-  padding: 10px; /* Padding inside the playlist */
-  background-color: #486f94; /* Background color */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  padding: 20px; /* Increased padding for a more spacious look */
+  background-color: rgb(125, 158, 196); /* Background color with opacity for a softer look */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  color: rgb(16, 17, 18); /* Font color */
+  opacity: 0.9; /* Overall opacity of 90% */
+  width: 100%; /* Full width */
+  max-width: 1000px; /* Maximum width */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
-h2 {
+
+
+.Playlist h2 {
   font-size: 2rem; /* Subheading style */
   margin-bottom: 15px; /* Spacing below the heading */
+  color: black; /* Headings in black for contrast */
+  cursor: pointer; /* Indicate that this is clickable */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.Playlist h2:hover {
+  color: rgba(236, 15, 15, 0.8); /* Change color on hover */
 }
 
 .track {
-  background-color: #a3b0da; /* Track background */
+  background-color: rgba(255, 255, 255, 0.8); /* Track background with opacity */
   color: #000; /* Text color */
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px; /* Padding inside each track */
+  margin: 10px 0; /* Margin between tracks */
   border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.2s; /* Smooth background color transition */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transition: transform 0.2s, background-color 0.2s; /* Smooth transitions for hover effects */
 }
 
 .track:hover {
-  background-color: #e2e2e2; /* Darken background on hover */
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  background-color: rgb(133, 160, 196); /* Match the hover color from SearchResults */
 }
 
 button {
@@ -31,29 +47,37 @@ button {
   border-radius: 5px; /* Rounded corners */
   padding: 8px 12px; /* Padding for button */
   cursor: pointer; /* Pointer on hover */
-  transition: background-color 0.3s; /* Smooth background transition */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth background transition */
 }
 
 button:hover {
   background-color: #c0392b; /* Darken button on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
 }
 
 input[type="text"] {
-  padding: 8px;
+  padding: 8px; /* Padding for input */
   margin: 10px 0; /* Space above and below */
-  border: 1px solid #61dafb; /* Input border color */
+  border: 1px solid #53c3e1; /* Input border color */
   border-radius: 5px; /* Rounded corners */
   outline: none; /* Remove outline on focus */
-  width: 250px; /* Set a width for the input */
+  width: 100%; /* Full width */
+  max-width: 250px; /* Maximum width */
+  color: #06052d; /* Input text color */
+  transition: border-color 0.3s; /* Smooth border color transition */
 }
 
-/* Playlist.css */
-
-.Playlist h2 {
-  color: #3476d2; /* Change h2 color to blue */
+input[type="text"]:focus {
+  border-color: #f23105; /* Change border color on focus */
 }
 
-.Playlist input {
-  color: #61dafb; /* Change input color to blue */
+/* Additional Styling for H4 if needed */
+.track h4 {
+  font-weight: bold; /* Bold font for artist name */
 }
+
+.track p {
+  margin: 5px 0; /* Spacing between track information */
+}
+
 

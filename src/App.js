@@ -4,7 +4,6 @@ import SearchBar from './SearchBar/SearchBar';
 import SearchResults from './SearchResults/SearchResults';
 import Playlist from './Playlist/Playlist';
 import Spotify from './Spotify';
-import logo from './logo.svg';
 
 const App = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -80,11 +79,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <img src={logo} className="App-logo" alt="logo" />
       <h1>
         Ja<span className="highlight">mmm</span>ing
       </h1>
-      {username && <p>Welcome, {username}!</p>}
+
+      {username && (
+        <div className="welcome-message">
+          <p>Welcome, {username}!</p>
+        </div>
+      )}
 
       <SearchBar onSearch={search} />
 
