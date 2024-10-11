@@ -1,23 +1,24 @@
+/* Global CSS Reset */
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+
+/* General App styling */
 .App {
   text-align: center;
-  font-family: 'Arial', sans-serif; /* Added font family for better typography */
-  background-color: #5c85b0; /* Change this value to your desired shade of blue */
-  min-height: 100vh; /* Ensure it covers the full viewport height */
-  color: white; /* Optional: change text color to improve contrast */
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  font-family: 'Arial', sans-serif; 
+  background-image: url('./background2.png'); 
+  background-size: cover; 
+  background-position: center; 
+  min-height: 100vh; 
+  color: rgb(244, 243, 243); 
 }
 
 
+/* Header and other styles */
 .App-header {
   background-color: #4e75c5;
   min-height: 100vh;
@@ -25,70 +26,117 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(32, 119, 186);
-  padding: 20px; /* Added padding */
-  border-bottom: 5px solid #61dafb; /* Added a border for separation */
+  font-size: calc(15px + 2vmin);
+  color: rgb(106, 137, 176);
+  padding: 20px; 
+  border-bottom: 5px solid #61dafb; 
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Spicy+Rice&display=swap");
 
 h1 {
-  font-family: 'Roboto Slab', serif;
-  font-size: 3rem; /* Larger title font */
-  margin-bottom: 20px; /* Spacing below the title */
-  text-shadow: 2px 2px 4px rgba(33, 98, 163, 0.5); /* Added text shadow for depth */
-  letter-spacing: 1px; /* Increased spacing between letters */
+  font-family: 'Spicy Rice', cursive; 
+  font-size: 5rem; 
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 6px rgba(33, 98, 163, 0.7); 
+  letter-spacing: 2px; 
+  transition: transform 0.3s ease, color 0.3s ease; 
 }
+
+/* hover effect */
+h1:hover {
+  color: #61dafb; 
+  transform: scale(1.1); 
+  cursor: pointer; 
+}
+
 
 h2 {
-  font-size: 2rem; /* Subheading style */
-  margin: 20px 0; /* Spacing above and below */
+  font-size: 3rem; 
+  margin: 20px 0; 
+  color: black; 
 }
 
+
+
+/* Track styling */
 .track {
-  background-color: #dde2e8; /* Track background */
-  color: #2bb21f; /* Text color */
+  background-color: #dde2e8;
+  color: #7684bb; 
   padding: 10px;
   margin: 10px 0;
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  transition: transform 0.2s; /* Smooth transform effect */
+  border-radius: 5px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s; 
 }
 
 .track:hover {
   transform: scale(1.02); /* Slightly enlarge on hover */
 }
 
+/* Button styling */
 button {
-  background-color: #61dafb; /* Button color */
-  color: #fff; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  cursor: pointer; /* Pointer on hover */
-  transition: background-color 0.3s; /* Smooth background transition */
+  background-color: #bf3318; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
 }
 
 button:hover {
-  background-color: #4da6d1; /* Darken button on hover */
+  background-color: #4da6d1; 
 }
 
+/* Input styling remains unchanged */
 input[type="text"] {
-  padding: 10px; /* Padding inside the input */
-  margin: 10px 0; /* Margin above and below */
-  border: 1px solid #61dafb; /* Input border color */
-  border-radius: 5px; /* Rounded corners */
-  outline: none; /* Remove outline on focus */
-  width: 200px; /* Set a width for the input */
+  padding: 10px; 
+  margin: 10px 0; 
+  border: 1px solid #61dafb; 
+  border-radius: 5px; 
+  outline: none; 
+  width: 200px; 
 }
 
 input[type="text"]:focus {
-  border-color: #4da6d1; /* Darken border on focus */
+  border-color: #4da6d1; 
+}
+
+/* Flexbox container for SearchResults and Playlist*/
+.App-playlist-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+}
+
+.App-playlist-container > div {
+  flex: 1; 
+  padding: 20px;
+  border: 2px solid #72abdd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #eaeff0; /* Light background for boxes */
+}
+
+.welcome-message {
+  position: absolute; 
+  top: 20px; 
+  right: 40px; 
+  color: white; 
+  font-size: 1rem; 
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .App-playlist-container {
+    flex-direction: column;
+  }
 }
 
 

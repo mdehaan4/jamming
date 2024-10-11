@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from 'react'; // Import useEffect for handling updates
+import React, { useState, useEffect } from 'react';
 import './Playlist.css';
 
-function Playlist({ playlistName, playlistTracks, setPlaylistTracks, setPlaylistName, onRemove, onSave }) {
+function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newPlaylistName, setNewPlaylistName] = useState(playlistName);
 
-  // Effect to synchronize playlist name when the prop changes
   useEffect(() => {
     setNewPlaylistName(playlistName);
   }, [playlistName]);
 
-  // Function to handle when the playlist title is clicked
   const handleTitleClick = () => {
     setIsEditing(true);
   };
 
-  // Function to handle input change for playlist name
   const handleInputChange = (e) => {
     setNewPlaylistName(e.target.value);
   };
 
-  // Function to handle input blur (when user clicks away)
   const handleBlur = () => {
     setIsEditing(false);
-    setPlaylistName(newPlaylistName); // Update the playlist name in the parent component
+    onNameChange(newPlaylistName);
   };
 
   return (
@@ -36,27 +32,27 @@ function Playlist({ playlistName, playlistTracks, setPlaylistTracks, setPlaylist
             onChange={handleInputChange} 
             onBlur={handleBlur} 
             autoFocus 
+            id="playlist-name-input" 
           />
         ) : (
           newPlaylistName
         )}
       </h2>
 
-      {/* Displaying tracks in the playlist */}
       {playlistTracks.length > 0 ? (
         playlistTracks.map(track => (
-          <div key={track.id} className="track"> {/* Each track with a unique key */}
-            <h3>{track.name}</h3> {/* Display track name */}
-            <p>{track.artist}</p> {/* Display artist name */}
-            <button onClick={() => onRemove(track)}>Remove</button> {/* Remove button passing the track object */}
+          <div key={track.id} className="track">
+            <h3>{track.name}</h3>
+            <p>{track.artist}</p>
+            <p>{track.album}</p> {/* Added album information */}
+            <button onClick={() => onRemove(track)}>Remove</button>
           </div>
         ))
       ) : (
-        <p>No tracks in this playlist</p> // Message when no tracks are present
+        <p>No tracks in this playlist</p>
       )}
 
-      {/* Button to save the playlist */}
-      <button onClick={onSave}>Export to Spotify</button> {/* Call onSave when clicked */}
+      <button onClick={onSave}>Export to Spotify</button>
     </div>
   );
 }

@@ -1,49 +1,83 @@
 .Playlist {
-  margin: 20px 0; /* Spacing around the component */
-  padding: 10px; /* Padding inside the playlist */
-  background-color: #486f94; /* Background color */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  margin: 20px 0; 
+  padding: 20px; 
+  background-color: rgb(125, 158, 196); 
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  color: rgb(16, 17, 18); 
+  opacity: 0.9; 
+  width: 100%; 
+  max-width: 1000px; 
+  transition: background-color 0.3s, box-shadow 0.3s; 
 }
 
-h2 {
-  font-size: 2rem; /* Subheading style */
-  margin-bottom: 15px; /* Spacing below the heading */
+
+
+.Playlist h2 {
+  font-size: 2rem; 
+  margin-bottom: 15px; 
+  color: black; 
+  cursor: pointer; 
+  transition: color 0.3s; 
+}
+
+.Playlist h2:hover {
+  color: rgba(236, 15, 15, 0.8); 
 }
 
 .track {
-  background-color: #a3b0da; /* Track background */
-  color: #000; /* Text color */
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.2s; /* Smooth background color transition */
+  background-color: rgba(255, 255, 255, 0.8); 
+  color: #000; 
+  padding: 10px; 
+  margin: 10px 0; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.2s; 
 }
 
 .track:hover {
-  background-color: #e2e2e2; /* Darken background on hover */
+  transform: scale(1.02); 
+  background-color: rgb(133, 160, 196); 
 }
 
 button {
-  background-color: #e74c3c; /* Remove button color */
-  color: #fff; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 8px 12px; /* Padding for button */
-  cursor: pointer; /* Pointer on hover */
-  transition: background-color 0.3s; /* Smooth background transition */
+  background-color: #e74c3c; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 8px 12px; 
+  cursor: pointer; 
+  transition: background-color 0.3s, transform 0.2s; 
 }
 
 button:hover {
-  background-color: #c0392b; /* Darken button on hover */
+  background-color: #c0392b; 
+  transform: scale(1.05); 
 }
 
 input[type="text"] {
-  padding: 8px;
-  margin: 10px 0; /* Space above and below */
-  border: 1px solid #61dafb; /* Input border color */
-  border-radius: 5px; /* Rounded corners */
-  outline: none; /* Remove outline on focus */
-  width: 250px; /* Set a width for the input */
+  padding: 8px; 
+  margin: 10px 0; 
+  border: 1px solid #53c3e1; 
+  border-radius: 5px; 
+  outline: none; 
+  width: 100%; 
+  max-width: 250px; 
+  color: #06052d;
+  transition: border-color 0.3s; 
 }
+
+input[type="text"]:focus {
+  border-color: #f23105; 
+}
+
+/* Styling for H4*/
+.track h4 {
+  font-weight: bold; 
+}
+
+.track p {
+  margin: 5px 0; 
+}
+
 
