@@ -1,33 +1,24 @@
 /* Global CSS Reset */
 * {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
 }
 
-body {
-  margin: 0; /* Remove default body margin */
-}
 
 /* General App styling */
 .App {
   text-align: center;
-  font-family: 'Arial', sans-serif; /* Added font family for better typography */
-  background-image: url('./background2.png'); /* Update path if necessary */
-  background-size: cover; /* Cover the entire background */
-  background-position: center; /* Center the background image */
-  min-height: 100vh; /* Ensure it covers the full viewport height */
-  color: rgb(244, 243, 243); /* Optional: change text color to improve contrast */
+  font-family: 'Arial', sans-serif; 
+  background-image: url('./background2.png'); 
+  background-size: cover; 
+  background-position: center; 
+  min-height: 100vh; 
+  color: rgb(244, 243, 243); 
 }
 
 
-
-.rotating-logo {
-  width: 100px; /* Adjust size as needed */
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* Header and other styles remain unchanged */
+/* Header and other styles */
 .App-header {
   background-color: #4e75c5;
   min-height: 100vh;
@@ -37,8 +28,8 @@ body {
   justify-content: center;
   font-size: calc(15px + 2vmin);
   color: rgb(106, 137, 176);
-  padding: 20px; /* Added padding */
-  border-bottom: 5px solid #61dafb; /* Added a border for separation */
+  padding: 20px; 
+  border-bottom: 5px solid #61dafb; 
 }
 
 .App-link {
@@ -48,75 +39,75 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Spicy+Rice&display=swap");
 
 h1 {
-  font-family: 'Spicy Rice', cursive; /* Make sure the font name is correct */
-  font-size: 5rem; /* Increase the title font size */
-  margin-bottom: 20px; /* Spacing below the title */
-  text-shadow: 4px 4px 6px rgba(33, 98, 163, 0.7); /* More pronounced text shadow */
-  letter-spacing: 2px; /* Increase letter spacing */
-  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+  font-family: 'Spicy Rice', cursive; 
+  font-size: 5rem; 
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 6px rgba(33, 98, 163, 0.7); 
+  letter-spacing: 2px; 
+  transition: transform 0.3s ease, color 0.3s ease; 
 }
 
-/* Add hover effect */
+/* hover effect */
 h1:hover {
-  color: #61dafb; /* Change color on hover */
-  transform: scale(1.1); /* Slightly enlarge on hover */
-  cursor: pointer; /* Change cursor to pointer */
+  color: #61dafb; 
+  transform: scale(1.1); 
+  cursor: pointer; 
 }
 
 
 h2 {
-  font-size: 3rem; /* Subheading style */
-  margin: 20px 0; /* Spacing above and below */
+  font-size: 3rem; 
+  margin: 20px 0; 
   color: black; 
 }
 
 
 
-/* Track styling remains unchanged */
+/* Track styling */
 .track {
-  background-color: #dde2e8; /* Track background */
-  color: #7684bb; /* Text color */
+  background-color: #dde2e8;
+  color: #7684bb; 
   padding: 10px;
   margin: 10px 0;
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  transition: transform 0.2s; /* Smooth transform effect */
+  border-radius: 5px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s; 
 }
 
 .track:hover {
   transform: scale(1.02); /* Slightly enlarge on hover */
 }
 
-/* Button styling remains unchanged */
+/* Button styling */
 button {
-  background-color: #bf3318; /* Button color */
-  color: #fff; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  cursor: pointer; /* Pointer on hover */
-  transition: background-color 0.3s; /* Smooth background transition */
+  background-color: #bf3318; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
 }
 
 button:hover {
-  background-color: #4da6d1; /* Darken button on hover */
+  background-color: #4da6d1; 
 }
 
 /* Input styling remains unchanged */
 input[type="text"] {
-  padding: 10px; /* Padding inside the input */
-  margin: 10px 0; /* Margin above and below */
-  border: 1px solid #61dafb; /* Input border color */
-  border-radius: 5px; /* Rounded corners */
-  outline: none; /* Remove outline on focus */
-  width: 200px; /* Set a width for the input */
+  padding: 10px; 
+  margin: 10px 0; 
+  border: 1px solid #61dafb; 
+  border-radius: 5px; 
+  outline: none; 
+  width: 200px; 
 }
 
 input[type="text"]:focus {
-  border-color: #4da6d1; /* Darken border on focus */
+  border-color: #4da6d1; 
 }
 
-/* Flexbox container for SearchResults and Playlist remains unchanged */
+/* Flexbox container for SearchResults and Playlist*/
 .App-playlist-container {
   display: flex;
   justify-content: space-between;
@@ -125,7 +116,7 @@ input[type="text"]:focus {
 }
 
 .App-playlist-container > div {
-  flex: 1; /* Each box takes equal space */
+  flex: 1; 
   padding: 20px;
   border: 2px solid #72abdd;
   border-radius: 8px;
@@ -134,26 +125,18 @@ input[type="text"]:focus {
 }
 
 .welcome-message {
-  position: absolute; /* Or use fixed for it to stay in view */
-  top: 20px; /* Adjust the distance from the top */
-  right: 20px; /* Adjust the distance from the right */
-  color: white; /* Ensure the text is visible against your background */
-  font-size: 1rem; /* Adjust font size as needed */
+  position: absolute; 
+  top: 20px; 
+  right: 40px; 
+  color: white; 
+  font-size: 1rem; 
 }
 
-/* Responsive layout for smaller screens remains unchanged */
+/* Responsive layout for smaller screens */
 @media (max-width: 768px) {
   .App-playlist-container {
     flex-direction: column;
   }
 }
 
-/* App logo animation remains unchanged */
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

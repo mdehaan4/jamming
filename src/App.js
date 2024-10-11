@@ -15,10 +15,11 @@ const App = () => {
 
   useEffect(() => {
     const token = Spotify.getAccessToken();
-    setAccessToken(token);
-    console.log('Access Token:', token);
-
     if (token) {
+      setAccessToken(token);
+      localStorage.setItem('accessToken', token);
+      console.log('Access Token:', token);
+
       // Fetch user info after getting access token
       Spotify.getUserInfo()
         .then((data) => {
@@ -29,7 +30,12 @@ const App = () => {
           console.error('Error fetching user profile:', error);
         });
     } else {
-      console.warn('No access token available.');
+      const storedToken = localStorage.getItem('accessToken'); 
+      if (storedToken) {
+        setAccessToken(storedToken);
+      } else {
+        console.warn('No access token available.');
+      }
     }
   }, []);
 
@@ -73,7 +79,7 @@ const App = () => {
         setPlaylistTracks([]); // Clear playlist tracks after saving
       })
       .catch((error) => {
-        console.error('Error saving playlist:', error); // Log any errors that occur
+        console.error('Error saving playlist:', error); 
       });
   }, [playlistName, playlistTracks]);
 

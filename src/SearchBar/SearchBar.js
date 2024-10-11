@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SearchBar.css'; // Ensure you have this file for styling
+import './SearchBar.css'; 
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,7 +35,7 @@ const SearchBar = ({ onSearch }) => {
   );
 };
 
-export default SearchBar; // Exporting SearchBar component
+export default SearchBar;
 
 
 

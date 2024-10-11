@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for prop validation
-import './Track.css'; // Import your CSS file for styling
+import PropTypes from 'prop-types'; 
+import './Track.css'; 
 
 const Track = ({ track, onAdd, onRemove }) => {
   return (
@@ -16,7 +16,7 @@ const Track = ({ track, onAdd, onRemove }) => {
           <button
             onClick={() => onAdd(track)}
             aria-label={`Add ${track.name} to playlist`}
-            className="add-button" // Optional class for styling
+            className="add-button" // class for styling
           >
             +
           </button>
@@ -25,7 +25,7 @@ const Track = ({ track, onAdd, onRemove }) => {
           <button
             onClick={() => onRemove(track)}
             aria-label={`Remove ${track.name} from playlist`}
-            className="remove-button" // Optional class for styling
+            className="remove-button" // class for styling
           >
             - 
           </button>

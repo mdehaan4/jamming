@@ -1,6 +1,6 @@
 import React from 'react';
 import './Tracklist.css';
-import Track from './Track'; // Import the Track component
+import Track from './Track'; // 
 
 function Tracklist({ tracks }) { // Accept 'tracks' as a prop
   return (
@@ -17,7 +17,7 @@ function Tracklist({ tracks }) { // Accept 'tracks' as a prop
   );
 }
 
-export default Tracklist; // Exporting Tracklist component
+export default Tracklist; 
 
 
 

@@ -4,6 +4,7 @@ let accessToken;
 let userId;
 
 const Spotify = {
+  // Function to retrieve access token
   getAccessToken() {
     if (accessToken) {
       return accessToken;
@@ -20,11 +21,12 @@ const Spotify = {
       return accessToken;
     } else {
       // If no token, redirect to Spotify authorization
-      const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+      const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public,playlist-modify-private&redirect_uri=${redirectUri}`;
       window.location = authUrl;
     }
   },
 
+  // Function to get user information
   getUserInfo() {
     const token = this.getAccessToken();
     return fetch('https://api.spotify.com/v1/me', {
@@ -48,6 +50,7 @@ const Spotify = {
     });
   },
 
+  // Function to search for tracks
   search(term) {
     const token = this.getAccessToken();
     if (!token) {
@@ -60,14 +63,15 @@ const Spotify = {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
       return response.json();
     })
-    .then((data) => {
-      return data.tracks.items.map((track) => ({
+    .then(data => {
+      // Map and return the required track details
+      return data.tracks.items.map(track => ({
         id: track.id,
         name: track.name,
         artist: track.artists[0].name, // Assuming the first artist is the main one
@@ -75,12 +79,13 @@ const Spotify = {
         uri: track.uri,
       }));
     })
-    .catch((error) => {
+    .catch(error => {
       console.error('Error searching for tracks:', error);
       throw error;
     });
   },
 
+  // Function to save a playlist
   savePlaylist(name, trackUris) {
     if (!name || !trackUris.length) {
       console.error('Playlist name or track URIs missing.');
@@ -97,7 +102,7 @@ const Spotify = {
     return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({ name: name, public: false }),
+      body: JSON.stringify({ name: name, public: false }), // Change to 'true' if you want it to be public
     })
     .then(response => {
       if (!response.ok) {
@@ -128,5 +133,3 @@ const Spotify = {
 };
 
 export default Spotify;
-
-

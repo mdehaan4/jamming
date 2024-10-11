@@ -32,7 +32,7 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
             onChange={handleInputChange} 
             onBlur={handleBlur} 
             autoFocus 
-            id="playlist-name-input" // Unique ID added
+            id="playlist-name-input" 
           />
         ) : (
           newPlaylistName
