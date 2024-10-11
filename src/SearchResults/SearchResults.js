@@ -2,28 +2,34 @@ import React from 'react';
 import Track from '../Track/Track';
 import './SearchResults.css';
 
-const SearchResults = ({ tracks, onAdd }) => {
+const SearchResults = ({ searchResults, onAdd }) => { // Change `tracks` to `searchResults`
+  if (!searchResults || searchResults.length === 0) { // Add check for undefined or empty searchResults
+    return (
+      <div className="SearchResults">
+        <h2>Results</h2>
+        <p>No results found. Please try a different search.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="SearchResults">
       <h2>Results</h2>
       <div>
-        {tracks.length === 0 ? ( // Check if there are no tracks
-          <p>No results found. Please try a different search.</p>
-        ) : (
-          tracks.map(track => (
-            <Track 
-              key={track.id}
-              track={track}
-              onAdd={onAdd}
-            />
-          ))
-        )}
+        {searchResults.map(track => ( // Use searchResults instead of tracks
+          <Track 
+            key={track.id}
+            track={track}
+            onAdd={onAdd}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
 export default SearchResults;
+
 
 
 

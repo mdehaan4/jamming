@@ -1,3 +1,4 @@
+/* General App styling */
 .App {
   text-align: center;
   font-family: 'Arial', sans-serif; /* Added font family for better typography */
@@ -16,7 +17,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 .App-header {
   background-color: #4e75c5;
@@ -50,6 +50,7 @@ h2 {
   margin: 20px 0; /* Spacing above and below */
 }
 
+/* Track styling */
 .track {
   background-color: #dde2e8; /* Track background */
   color: #2bb21f; /* Text color */
@@ -64,6 +65,7 @@ h2 {
   transform: scale(1.02); /* Slightly enlarge on hover */
 }
 
+/* Button styling */
 button {
   background-color: #61dafb; /* Button color */
   color: #fff; /* Button text color */
@@ -78,6 +80,7 @@ button:hover {
   background-color: #4da6d1; /* Darken button on hover */
 }
 
+/* Input styling */
 input[type="text"] {
   padding: 10px; /* Padding inside the input */
   margin: 10px 0; /* Margin above and below */
@@ -91,4 +94,37 @@ input[type="text"]:focus {
   border-color: #4da6d1; /* Darken border on focus */
 }
 
+/* Flexbox container for SearchResults and Playlist */
+.App-playlist-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+}
+
+.App-playlist-container > div {
+  flex: 1; /* Each box takes equal space */
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Light background for boxes */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .App-playlist-container {
+    flex-direction: column;
+  }
+}
+
+/* App logo animation */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 

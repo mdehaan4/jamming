@@ -1,5 +1,7 @@
 .SearchResults {
   margin: 20px 0; /* Spacing around the component */
+  background-color: #f0f0f0; /* Example background color */
+  color: rgb(46, 118, 226); /* Set the font color to blue */
 }
 
 h2 {
@@ -8,7 +10,7 @@ h2 {
 }
 
 .track {
-  background-color: #f9f9f9; /* Track background */
+  background-color: #184b92; /* Track background */
   color: #000; /* Text color */
   padding: 10px;
   margin: 10px 0;
@@ -20,3 +22,5 @@ h2 {
 .track:hover {
   transform: scale(1.02); /* Slightly enlarge on hover */
 }
+
+

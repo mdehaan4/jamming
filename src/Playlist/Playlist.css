@@ -47,3 +47,13 @@ input[type="text"] {
   width: 250px; /* Set a width for the input */
 }
 
+/* Playlist.css */
+
+.Playlist h2 {
+  color: #3476d2; /* Change h2 color to blue */
+}
+
+.Playlist input {
+  color: #61dafb; /* Change input color to blue */
+}
+
