@@ -10,13 +10,11 @@ const App = () => {
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [accessToken, setAccessToken] = useState('');
   const [username, setUsername] = useState('');
 
   useEffect(() => {
     const token = Spotify.getAccessToken();
     if (token) {
-      setAccessToken(token);
       localStorage.setItem('accessToken', token);
       console.log('Access Token:', token);
 
@@ -32,12 +30,12 @@ const App = () => {
     } else {
       const storedToken = localStorage.getItem('accessToken'); 
       if (storedToken) {
-        setAccessToken(storedToken);
+        console.warn('Using stored access token.');
       } else {
         console.warn('No access token available.');
       }
     }
-  }, []);
+  }, []); // Dependency array should be empty if there are no external dependencies.
 
   const search = useCallback((term) => {
     console.log('Search term:', term);
